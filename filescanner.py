@@ -3,23 +3,25 @@ import sys
 import os
 from os.path import join, getsize, splitext
 from fileinfo import FileInfo
+from handler import DefaultHandler
 
 class FileScanner:
     """"""
-    def __init__(self, start, bps=True):
+    def __init__(self, start, handler=DefaultHandler):
         self.start = start
+        self.handler = handler
 
     def files_in(self, interested):
         for root, dirs, files in os.walk(self.start):
             for name in files:
                 if self.is_interested(name, interested):
                     finfo = FileInfo(root, name)
-                    print(finfo)
+                    self.handler.handle(finfo)
 
     def _file_is_format(self, name, fmt):
         a = splitext(name)
         if len(a) > 1:
-            return a[1][1:].lower() == fmt.lower()
+            return a[-1][1:].lower() == fmt.lower()
         else:
             return False
 
