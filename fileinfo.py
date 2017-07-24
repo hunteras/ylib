@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import sys
+import re
 from os.path import join, splitext
 
 class FileInfo:
@@ -8,6 +9,10 @@ class FileInfo:
         self.name = name
         self.fullpath = join(parent, name)
         self.ftype = self._file_type(name)
+        self.tags = self._get_tags()
+
+    def _get_tags(self):
+        return list(filter(lambda x: len(x) > 0, re.split('[_\-, \.]', self.name)))
         
     def _file_type(self, name):
         a = splitext(name)
@@ -17,7 +22,7 @@ class FileInfo:
             return None
         
     def __str__(self):
-        return "-".join([self.name, self.fullpath])
+        return "-".join([self.name, self.fullpath])+" tags :"+" ".join(self.tags)
         
 
 
