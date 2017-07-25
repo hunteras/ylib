@@ -5,7 +5,7 @@ import json
 
 app = Flask(__name__)
 
-es = Elasticsearch()
+es = Elasticsearch(['http://192.168.0.99:9200'])
 
 @app.route('/')
 def index():

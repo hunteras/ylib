@@ -33,8 +33,10 @@ class FileScanner:
         
 
 def main():
-    fscanner = FileScanner('/Users/zhouyan/Documents/Technology/C++')
-    fscanner.files_in(['pdf'])
+    d = ['/Users/zhouyan/Documents/Technology/C++', '/Users/zhouyan/Documents/Technology/C']
+    for path in d:
+        fscanner = FileScanner(path)
+        fscanner.files_in(['pdf'])
 
 if __name__ == '__main__':
     main()

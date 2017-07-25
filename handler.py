@@ -5,7 +5,7 @@ from elasticsearch import Elasticsearch
 
 class Handler:
     def __init__(self):
-        self.es = Elasticsearch()
+        self.es = Elasticsearch(['http://192.168.0.99:9200'])
         
     def handle(self, finfo):
         body = dumps(finfo.__dict__)
